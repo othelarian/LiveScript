@@ -17,7 +17,15 @@ global.option = option
 global.task = task
 
 try
-  fs.readFileSync \Livefile \utf-8 |> ls.run
+  try
+    code = fs.readFileSync \Livefile \utf-8
+  catch
+    if e.code is \ENOENT
+      err = new Error 'No Livefile'
+      err.code = \LIVEFILE
+      throw err
+    else throw e
+  ls.run code
   prepend = 'Usage: live [options]\n\nOptions:'
   mlgth = Obj.keys tasks |> List.maximum-by (.length) |> (.length)
   filler = (str) -> ' ' * (mlgth - str.length)
@@ -37,7 +45,7 @@ try
     | opts._.0 not in Obj.keys tasks
       console.log "ERROR: task does not exist (#{opts._.0})!"
     | _                  => tasks[opts._.0].fn opts
-catch e
+catch
   switch e.code
-  | \ENOENT   => console.log 'There is no Livefile at this package root'
+  | \LIVEFILE => console.log 'There is no Livefile at this package root'
   | otherwise => console.log e

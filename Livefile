@@ -1,4 +1,15 @@
-option \option \o \Boolean 'an option'
+require! { fs, '.': {compile} }
 
-task 'valid', 'validating the Livefile', !->
-  console.log 'this is a Livefile!'
+task \live, '', !->
+  require! { path }
+  fs.readFileSync \./bin-src/live.ls, \utf-8
+    |> compile _, bare: yes
+    |> ('#!/usr/bin/env node\n\n' ++)
+    |> fs.writeFileSync \./bin/live, _
+  console.log 'live command (re)generated'
+
+task \package, '', !->
+  pkg = fs.readFileSync \./package.json.ls, \utf-8
+    |> compile _, json: yes
+    |> fs.writeFileSync \./package.json, _
+  console.log 'package.json (re)generated'
