@@ -1,5 +1,5 @@
 name: 'livescript'
-version: '1.6.1'
+version: '1.0.1'
 
 description: 'LiveScript is a language which compiles to JavaScript. It has a straightforward mapping to JavaScript and allows you to write expressive code devoid of repetitive boilerplate. While LiveScript adds many features to assist in functional style programming, it also has many improvements for object oriented and imperative programming.'
 
@@ -30,6 +30,7 @@ files:
 main: './lib/'
 browser: './lib/browser.js'
 bin:
+  live: './bin/live'
   lsc: './bin/lsc'
 
 scripts:
