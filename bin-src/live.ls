@@ -26,7 +26,7 @@ try
       throw err
     else throw e
   ls.run code
-  prepend = 'Usage: live [options]\n\nOptions:'
+  prepend = 'Usage: live [options] COMMAND\n\nOptions:'
   mlgth = Obj.keys tasks |> List.maximum-by (.length) |> (.length)
   filler = (str) -> ' ' * (mlgth - str.length)
   line = (acc, elt) -> "#{acc}#{elt.0}#{filler elt.0}  #{elt.1.desc}\n"

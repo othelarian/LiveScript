@@ -45,7 +45,7 @@ try {
     }
   }
   ls.run(code);
-  prepend = 'Usage: live [options]\n\nOptions:';
+  prepend = 'Usage: live [options] COMMAND\n\nOptions:';
   mlgth = function(it){
     return it.length;
   }(
